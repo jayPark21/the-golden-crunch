@@ -138,8 +138,9 @@ const Visualizer: React.FC<VisualizerProps> = ({ scrollProgress }) => {
           drawHeight = drawWidth / imgRatio;
         }
 
-        const x = (width / 2) - drawWidth / 2;
-        const y = (height / 2) - drawHeight / 2;
+        // 정중앙 배치 + 텍스트와 겹치지 않게 약간 아래로 내림
+        const x = (width - drawWidth) / 2;
+        const y = (height - drawHeight) / 2 + (height * 0.1); // 화면 높이의 10%만큼 아래로 이동
 
         ctx.save();
         // 미세한 부유 효과
