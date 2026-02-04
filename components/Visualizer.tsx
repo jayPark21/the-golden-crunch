@@ -123,12 +123,18 @@ const Visualizer: React.FC<VisualizerProps> = ({ scrollProgress }) => {
         const imgRatio = currentImg.width / currentImg.height;
         const canvasRatio = width / height;
 
+        // 화면 점유율 조정 (기존 0.8 -> 0.5로 축소하여 여백 확보 및 해상도 이슈 완화)
+        const SCALE_FACTOR = 0.5;
+
+        // 이미지 비율 유지하면서 화면 중앙에 배치
         let drawWidth, drawHeight;
         if (canvasRatio > imgRatio) {
-          drawHeight = height * 0.8;
+          // 화면이 더 납작할 때 (가로가 길 때) -> 높이 기준 맞춤
+          drawHeight = height * SCALE_FACTOR;
           drawWidth = drawHeight * imgRatio;
         } else {
-          drawWidth = width * 0.8;
+          // 화면이 더 길쭉할 때 (세로가 길 때) -> 너비 기준 맞춤
+          drawWidth = width * SCALE_FACTOR;
           drawHeight = drawWidth / imgRatio;
         }
 
